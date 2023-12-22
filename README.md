@@ -79,4 +79,6 @@ The appearance and behavior of the `AccordionWithSearch` component can be custom
 Feel free to contribute to the improvement and enhancement of this component. If you encounter any issues or have suggestions, please create an issue or reach out to me at adjanour@icloud.com
 
 ---
-<div style="margin:auto" >© Africoda</div>
+<div align="center"> 
+  Copyright © Africoda
+</div>
