@@ -1,6 +1,5 @@
 # ReactComponents
 A repo full of feature rich react components
-Certainly! Below is a documentation template for your `AccordionWithSearch` component. Feel free to customize it further based on your specific audience and presentation context.
 
 ---
 
