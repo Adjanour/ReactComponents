@@ -19,6 +19,12 @@ type AccordionItemProps = {
 type AccordionChildProps = {
     child: AccordionItemType;
 }
+const navigationActive = (({isActive})=> {
+  return{
+    color: isActive ?"white" : "black",
+    textDecoration : "none",
+  }
+})
 
 function AccordionItem({ icon, title, children, path, searchTerm }:AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +33,7 @@ function AccordionItem({ icon, title, children, path, searchTerm }:AccordionItem
     setIsOpen(!isOpen);
   };
 
+ 
   return (
     <>
     <div>
@@ -53,7 +60,7 @@ function AccordionItem({ icon, title, children, path, searchTerm }:AccordionItem
           </div>
       </button>
       ):(
-        <NavLink to={path ? path : ''} >
+        <NavLink to={path ? path : ''} style={navigationActive} key={title} >
       <button className={cn("accordion-item",isOpen ? 'active':"")} onClick={toggleAccordion} aria-expanded={isOpen}>
         <div className='title-theme' style={{display:'flex',flexDirection:'row'}}>
         <div className="icon">{icon}</div>
@@ -81,9 +88,9 @@ function AccordionItem({ icon, title, children, path, searchTerm }:AccordionItem
       {isOpen && (
         <div className="accordion-children">
         {children
-      ?.filter((child) => child.title.toLowerCase().includes( searchTerm ? searchTerm.toLowerCase().trim(): ''))
+      ?.filter((child) => child.title.toLowerCase().startsWith( searchTerm ? searchTerm.toLowerCase().trim(): ''))
       .map((child, index) => (
-        <AccordionChild key={child.title} child={child} />
+        <AccordionChild  child={child} />
       ))}
       </div>
       )}
@@ -92,7 +99,7 @@ function AccordionItem({ icon, title, children, path, searchTerm }:AccordionItem
 }
 function AccordionChild({ child }:AccordionChildProps) {
   return (
-    <NavLink to={child.path ? child.path : ''} key={child.title}>
+    <NavLink to={child.path ? child.path : ''} key={child.title} style={navigationActive}>
       <div className="accordion-child">
         {child.icon && <div className="icon">{child.icon}</div>}
         <p className="text-md" style={{ marginLeft: '5px' }}>
@@ -111,18 +118,17 @@ export function AccordionWithSearch() {
     setSearchTerm(event.target.value);
   };
   const filteredAccordionItems = AccordionItems.filter((item:AccordionItemType) =>
-  item.title.toLowerCase().includes(searchTerm.toLowerCase().trim()) ||
-  (item.children && item.children.some((child) => child.title.toLowerCase().includes(searchTerm.toLowerCase().trim())))
+  item.title.toLowerCase().startsWith(searchTerm.toLowerCase().trim()) ||
+  (item.children && item.children.some((child) => child.title.toLowerCase().startsWith(searchTerm.toLowerCase().trim())))
 );
 
   // ... rest of the component
   return (
     <div className="accordion">
       <SearchBar onSearch={handleSearch} />
-      {/* ... rest of the component */}
       <hr />
       {hasItems && filteredAccordionItems.map((item:AccordionItemType) => (
-        <AccordionItem key={item.title} icon={item.icon} title={item.title} children={item.children} path={item.path} searchTerm={searchTerm} />
+        <AccordionItem  icon={item.icon} title={item.title} children={item.children} path={item.path} searchTerm={searchTerm} />
       ))}
     </div>
   )
