@@ -21,8 +21,9 @@ type AccordionChildProps = {
 }
 const navigationActive = (({isActive})=> {
   return{
-    color: isActive ?"white" : "black",
+    color: isActive ?"blue" : "black",
     textDecoration : "none",
+    backgroundColor: isActive ? "blue":""
   }
 })
 
