@@ -1,0 +1,41 @@
+# Source files (we ship dist only)
+src/
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+
+# Tests
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+coverage/
+
+# Config files
+.eslintrc.json
+.prettierrc.json
+
+# Development files
+examples/
+.github/
+.git/
+.gitignore
+
+# Build artifacts
+*.tsbuildinfo
+node_modules/
+
+# Documentation source
+CONTRIBUTING.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
