@@ -38,7 +38,7 @@ const ChevronDownIcon = () => (
 export function AccordionItem({
   icon,
   title,
-  children,
+  children: items,
   path,
   searchTerm = '',
 }: AccordionItemProps) {
@@ -49,7 +49,7 @@ export function AccordionItem({
     setIsOpen(!isOpen);
   };
 
-  const hasChildren = children && children.length > 0;
+  const hasChildren = items && items.length > 0;
 
   const ItemContent = () => (
     <div className="accordion-item-content">
@@ -58,14 +58,9 @@ export function AccordionItem({
         <div className="text-md ml-1">{title}</div>
       </div>
       {hasChildren && (
-        <button
-          className="expand-button"
-          onClick={toggleAccordion}
-          aria-label={isOpen ? 'Collapse' : 'Expand'}
-          type="button"
-        >
+        <span className="expand-icon" aria-hidden="true">
           {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-        </button>
+        </span>
       )}
     </div>
   );
@@ -96,7 +91,7 @@ export function AccordionItem({
       </div>
       {isOpen && hasChildren && (
         <div className="accordion-children">
-          {children
+          {items
             ?.filter((child) =>
               child.title.toLowerCase().includes(searchTerm.toLowerCase().trim())
             )

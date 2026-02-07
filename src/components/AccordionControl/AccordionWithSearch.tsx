@@ -35,10 +35,11 @@ export function AccordionWithSearch({
             key={item.title}
             icon={item.icon}
             title={item.title}
-            children={item.children}
             path={item.path}
             searchTerm={searchTerm}
-          />
+          >
+            {item.children}
+          </AccordionItem>
         ))}
       {!hasItems && <p className="no-results">No items found</p>}
     </div>

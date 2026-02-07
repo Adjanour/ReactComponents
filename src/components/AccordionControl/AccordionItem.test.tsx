@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { AccordionItem } from '../AccordionItem';
+import { AccordionItem } from './AccordionItem';
 
 const renderWithRouter = (component: React.ReactElement) => {
   return render(<BrowserRouter>{component}</BrowserRouter>);
@@ -21,7 +21,11 @@ describe('AccordionItem', () => {
 
   it('renders with children as a button', () => {
     const children = [{ title: 'Child 1', path: '/child1' }];
-    renderWithRouter(<AccordionItem title="Parent" children={children} />);
+    renderWithRouter(
+      <AccordionItem title="Parent">
+        {children}
+      </AccordionItem>
+    );
     const button = screen.getByRole('button', { name: /Parent/i });
     expect(button).toBeInTheDocument();
   });
@@ -30,7 +34,11 @@ describe('AccordionItem', () => {
     const user = userEvent.setup();
     const children = [{ title: 'Child 1', path: '/child1' }];
     
-    renderWithRouter(<AccordionItem title="Parent" children={children} />);
+    renderWithRouter(
+      <AccordionItem title="Parent">
+        {children}
+      </AccordionItem>
+    );
     
     const button = screen.getByRole('button', { name: /Parent/i });
     expect(button).toHaveAttribute('aria-expanded', 'false');
@@ -44,10 +52,14 @@ describe('AccordionItem', () => {
 
   it('shows expand/collapse icons for items with children', () => {
     const children = [{ title: 'Child 1', path: '/child1' }];
-    renderWithRouter(<AccordionItem title="Parent" children={children} />);
+    const { container } = renderWithRouter(
+      <AccordionItem title="Parent">
+        {children}
+      </AccordionItem>
+    );
     
-    const expandButton = screen.getByRole('button', { name: /Expand/i });
-    expect(expandButton).toBeInTheDocument();
+    const expandIcon = container.querySelector('.expand-icon');
+    expect(expandIcon).toBeInTheDocument();
   });
 
   it('renders icon when provided', () => {
@@ -64,7 +76,9 @@ describe('AccordionItem', () => {
     ];
     
     renderWithRouter(
-      <AccordionItem title="Fruits" children={children} searchTerm="" />
+      <AccordionItem title="Fruits" searchTerm="">
+        {children}
+      </AccordionItem>
     );
     
     const button = screen.getByRole('button', { name: /Fruits/i });
