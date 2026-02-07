@@ -7,12 +7,12 @@ A collection of feature-rich, accessible React components built with TypeScript.
 
 ## Features
 
-✨ **Modern & Type-Safe** - Built with TypeScript for excellent IDE support and type safety  
-🎨 **Customizable** - Flexible props and styling options  
-♿ **Accessible** - ARIA attributes and keyboard navigation support  
-🔍 **Search Built-in** - Filter accordion items instantly  
-📦 **Tree-shakeable** - Optimized bundle size with ESM support  
-🧪 **Well-tested** - Comprehensive test coverage  
+**Modern & Type-Safe** - Built with TypeScript for excellent IDE support and type safety  
+**Customizable** - Flexible props and styling options  
+**Accessible** - ARIA attributes and keyboard navigation support  
+**Search Built-in** - Filter accordion items instantly  
+**Tree-shakeable** - Optimized bundle size with ESM support  
+**Well-tested** - Comprehensive test coverage  
 
 ## Installation
 
@@ -222,9 +222,9 @@ MIT © [Adjanour](https://github.com/Adjanour)
 ## Support
 
 If you encounter any issues or have questions:
-- 📧 Email: adjanour@icloud.com
-- 🐛 [Report a bug](https://github.com/Adjanour/ReactComponents/issues)
-- 💡 [Request a feature](https://github.com/Adjanour/ReactComponents/issues)
+- Email: adjanour@icloud.com
+- [Report a bug](https://github.com/Adjanour/ReactComponents/issues)
+- [Request a feature](https://github.com/Adjanour/ReactComponents/issues)
 
 ---
 
