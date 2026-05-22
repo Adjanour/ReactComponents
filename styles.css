@@ -1,0 +1,6 @@
+/* @adjanour/react-components — combined stylesheet */
+/* Import individual CSS files for smaller bundles */
+
+@import url('./accordion.css');
+@import url('./breadcrumbs.css');
+@import url('./command-palette.css');

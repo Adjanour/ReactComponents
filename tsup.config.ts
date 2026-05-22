@@ -1,12 +1,14 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
   dts: true,
-  splitting: false,
+  splitting: true,
   sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', 'react-router-dom', '@heroicons/react'],
   treeshake: true,
-});
+  outExtension({ format }) {
+    return { js: format === 'cjs' ? '.cjs' : '.js' }
+  },
+})

@@ -5,17 +5,20 @@ Thank you for your interest in contributing to ReactComponents! This document pr
 ## Development Setup
 
 1. **Fork and clone the repository**
+
    ```bash
    git clone https://github.com/Adjanour/ReactComponents.git
    cd ReactComponents
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Run tests**
+
    ```bash
    npm test
    ```
@@ -28,6 +31,7 @@ Thank you for your interest in contributing to ReactComponents! This document pr
 ## Development Workflow
 
 1. **Create a new branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -39,6 +43,7 @@ Thank you for your interest in contributing to ReactComponents! This document pr
    - Update documentation as needed
 
 3. **Run quality checks**
+
    ```bash
    npm run lint
    npm run typecheck

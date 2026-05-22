@@ -1,5 +1,3 @@
-export * from './AccordionWithSearch';
-export * from './AccordionItem';
-export * from './SearchBar';
-export * from './types';
+export { AccordionWithSearch } from './AccordionWithSearch';
 export { defaultAccordionItems } from './defaultItems';
+export type { AccordionItemType, AccordionWithSearchProps } from './types';

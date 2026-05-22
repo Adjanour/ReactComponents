@@ -1,1 +1,3 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest'
+
+Element.prototype.scrollIntoView = vi.fn()

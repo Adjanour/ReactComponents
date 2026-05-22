@@ -1,91 +1,86 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
 import { AccordionItem } from './AccordionItem';
-
-const renderWithRouter = (component: React.ReactElement) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-};
+import type { AccordionItemType } from './types';
 
 describe('AccordionItem', () => {
-  it('renders title correctly', () => {
-    renderWithRouter(<AccordionItem title="Test Item" />);
+  it('renders title', () => {
+    const item: AccordionItemType = { title: 'Test Item', path: '/test' };
+    render(<AccordionItem item={item} />);
     expect(screen.getByText('Test Item')).toBeInTheDocument();
   });
 
-  it('renders without children as a link', () => {
-    renderWithRouter(<AccordionItem title="Test Item" path="/test" />);
-    const link = screen.getByRole('link');
-    expect(link).toBeInTheDocument();
+  it('renders leaf items as links', () => {
+    const item: AccordionItemType = { title: 'Test', path: '/test' };
+    render(<AccordionItem item={item} />);
+    expect(screen.getByRole('link')).toHaveAttribute('href', '/test');
   });
 
-  it('renders with children as a button', () => {
-    const children = [{ title: 'Child 1', path: '/child1' }];
-    renderWithRouter(
-      <AccordionItem title="Parent">
-        {children}
-      </AccordionItem>
-    );
-    const button = screen.getByRole('button', { name: /Parent/i });
-    expect(button).toBeInTheDocument();
+  it('renders items with children as buttons', () => {
+    const item: AccordionItemType = {
+      title: 'Parent',
+      children: [{ title: 'Child 1', path: '/child1' }],
+    };
+    render(<AccordionItem item={item} />);
+    expect(screen.getByRole('button', { name: /Parent/i })).toBeInTheDocument();
   });
 
-  it('toggles accordion when clicked', async () => {
+  it('toggles accordion on click', async () => {
     const user = userEvent.setup();
-    const children = [{ title: 'Child 1', path: '/child1' }];
-    
-    renderWithRouter(
-      <AccordionItem title="Parent">
-        {children}
-      </AccordionItem>
-    );
-    
+    const item: AccordionItemType = {
+      title: 'Parent',
+      children: [{ title: 'Child 1', path: '/child1' }],
+    };
+    render(<AccordionItem item={item} />);
+
     const button = screen.getByRole('button', { name: /Parent/i });
     expect(button).toHaveAttribute('aria-expanded', 'false');
-    
+
     await user.click(button);
     expect(button).toHaveAttribute('aria-expanded', 'true');
-    
-    // Child should now be visible
     expect(screen.getByText('Child 1')).toBeInTheDocument();
   });
 
-  it('shows expand/collapse icons for items with children', () => {
-    const children = [{ title: 'Child 1', path: '/child1' }];
-    const { container } = renderWithRouter(
-      <AccordionItem title="Parent">
-        {children}
-      </AccordionItem>
-    );
-    
-    const expandIcon = container.querySelector('.expand-icon');
-    expect(expandIcon).toBeInTheDocument();
-  });
-
   it('renders icon when provided', () => {
-    const icon = <span data-testid="test-icon">Icon</span>;
-    renderWithRouter(<AccordionItem title="Test" icon={icon} path="/test" />);
-    expect(screen.getByTestId('test-icon')).toBeInTheDocument();
+    const item: AccordionItemType = {
+      title: 'Test',
+      path: '/test',
+      icon: <span data-testid="icon">*</span>,
+    };
+    render(<AccordionItem item={item} />);
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
   });
 
-  it('filters children based on searchTerm', async () => {
+  it('filters children by searchTerm', async () => {
     const user = userEvent.setup();
-    const children = [
-      { title: 'Apple', path: '/apple' },
-      { title: 'Banana', path: '/banana' },
-    ];
-    
-    renderWithRouter(
-      <AccordionItem title="Fruits" searchTerm="">
-        {children}
-      </AccordionItem>
-    );
-    
-    const button = screen.getByRole('button', { name: /Fruits/i });
-    await user.click(button);
-    
-    // Both children should be visible with empty search
+    const item: AccordionItemType = {
+      title: 'Fruits',
+      children: [
+        { title: 'Apple', path: '/apple' },
+        { title: 'Banana', path: '/banana' },
+      ],
+    };
+    render(<AccordionItem item={item} searchTerm="" />);
+
+    await user.click(screen.getByRole('button', { name: /Fruits/i }));
     expect(screen.getByText('Apple')).toBeInTheDocument();
     expect(screen.getByText('Banana')).toBeInTheDocument();
+  });
+
+  it('uses renderLink for custom link rendering', () => {
+    const item: AccordionItemType = { title: 'Custom', path: '/custom' };
+    render(
+      <AccordionItem
+        item={item}
+        renderLink={(i, children) => (
+          <a href={`https://example.com${i.path}`} className="custom-link">
+            {children}
+          </a>
+        )}
+      />
+    );
+    const link = screen.getByRole('link');
+    expect(link).toHaveClass('custom-link');
+    expect(link).toHaveAttribute('href', 'https://example.com/custom');
   });
 });

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-02-07
 
 ### Added
+
 - Complete TypeScript rewrite with full type safety
 - Modern build tooling with tsup for ESM and CJS outputs
 - Comprehensive test suite with Vitest and React Testing Library
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Full documentation and usage examples
 
 ### Changed
+
 - Migrated from JavaScript to TypeScript
 - Improved component structure and modularity
 - Enhanced search filtering logic
@@ -27,11 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modernized React patterns (removed inline styles where appropriate)
 
 ### Removed
+
 - Duplicate JavaScript versions
 - Commented-out code
 - Unused utility files
 
 ### Fixed
+
 - Event handler type safety issues
 - Key prop warnings in lists
 - Navigation logic bugs

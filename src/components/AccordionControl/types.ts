@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export interface AccordionItemType {
   title: string;
@@ -7,23 +7,8 @@ export interface AccordionItemType {
   children?: AccordionItemType[];
 }
 
-export interface AccordionItemProps {
-  icon?: ReactNode;
-  title: string;
-  path?: string;
-  children?: AccordionItemType[];
-  searchTerm?: string;
-}
-
-export interface AccordionChildProps {
-  child: AccordionItemType;
-}
-
-export interface SearchBarProps {
-  onSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 export interface AccordionWithSearchProps {
   items?: AccordionItemType[];
   className?: string;
+  renderLink?: (item: AccordionItemType, children: ReactNode) => ReactNode;
 }

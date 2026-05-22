@@ -1,233 +1,175 @@
 # React Components
 
-[![npm version](https://img.shields.io/npm/v/@adjanour/react-components.svg)](https://www.npmjs.com/package/@adjanour/react-components)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://img.shields.io/npm/v/@adjanour/react-components)](https://www.npmjs.com/package/@adjanour/react-components)
+[![CI](https://github.com/Adjanour/ReactComponents/actions/workflows/ci.yml/badge.svg)](https://github.com/Adjanour/ReactComponents/actions)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue)](https://unlicense.org)
 
-A collection of feature-rich, accessible React components built with TypeScript. Currently featuring the AccordionWithSearch component - a powerful accordion menu with built-in search functionality.
+Accessible, framework-agnostic React components with built-in CSS, dark mode, and
+**zero required peer dependencies** beyond React.
 
-## Features
+Components: `AccordionWithSearch`, `Breadcrumbs`, `CommandPalette`
 
-**Modern & Type-Safe** - Built with TypeScript for excellent IDE support and type safety  
-**Customizable** - Flexible props and styling options  
-**Accessible** - ARIA attributes and keyboard navigation support  
-**Search Built-in** - Filter accordion items instantly  
-**Tree-shakeable** - Optimized bundle size with ESM support  
-**Well-tested** - Comprehensive test coverage  
+[**Docs site**](https://adjanour.github.io/ReactComponents/) — [**Install**](#install) — [**Components**](#components)
 
-## Installation
+---
 
-```bash
-npm install @adjanour/react-components
-```
-
-or with yarn:
-
-```bash
-yarn add @adjanour/react-components
-```
-
-or with pnpm:
+## Install
 
 ```bash
 pnpm add @adjanour/react-components
 ```
 
-## Peer Dependencies
+Peer dependencies: `react` ^18 || ^19, `react-dom` ^18 || ^19.
 
-This package requires the following peer dependencies:
+---
 
-```json
-{
-  "react": "^17.0.0 || ^18.0.0",
-  "react-dom": "^17.0.0 || ^18.0.0",
-  "react-router-dom": "^6.0.0"
+## Quick start
+
+```tsx
+import { AccordionWithSearch } from '@adjanour/react-components'
+import '@adjanour/react-components/accordion.css'
+
+function Sidebar() {
+  return <AccordionWithSearch />
 }
 ```
 
-For icons, you'll also need:
-```bash
-npm install @heroicons/react clsx
-```
+---
 
 ## Components
 
 ### AccordionWithSearch
 
-A sophisticated accordion component with integrated search functionality, perfect for navigation menus and content organization.
-
-#### Basic Usage
+Searchable accordion navigation menu.
 
 ```tsx
-import { AccordionWithSearch } from '@adjanour/react-components';
+import { AccordionWithSearch } from '@adjanour/react-components'
+import '@adjanour/react-components/accordion.css'
 
-function App() {
-  return (
-    <div>
-      <AccordionWithSearch />
-    </div>
-  );
-}
+// Default items
+<AccordionWithSearch />
+
+// With custom items and React Router
+<AccordionWithSearch
+  items={[
+    { title: 'Dashboard', path: '/dashboard' },
+    {
+      title: 'Settings',
+      children: [
+        { title: 'Profile', path: '/settings/profile' },
+        { title: 'Account', path: '/settings/account' },
+      ],
+    },
+  ]}
+  renderLink={(item, children) => (
+    <NavLink to={item.path!}>{children}</NavLink>
+  )}
+/>
 ```
 
-#### Custom Items
+[Full docs →](https://adjanour.github.io/ReactComponents/components/accordion-with-search)
+
+---
+
+### Breadcrumbs
+
+Navigation breadcrumb trail with `aria-current` on the last item.
 
 ```tsx
-import { AccordionWithSearch, AccordionItemType } from '@adjanour/react-components';
-import { HomeIcon, CogIcon } from '@heroicons/react/outline';
+import { Breadcrumbs } from '@adjanour/react-components'
+import '@adjanour/react-components/breadcrumbs.css'
 
-const customItems: AccordionItemType[] = [
-  {
-    title: 'Home',
-    icon: <HomeIcon className="h-5 w-5" />,
-    path: '/',
-  },
-  {
-    title: 'Settings',
-    icon: <CogIcon className="h-5 w-5" />,
-    children: [
-      {
-        title: 'Profile',
-        path: '/settings/profile',
-      },
-      {
-        title: 'Account',
-        path: '/settings/account',
-      },
-    ],
-  },
-];
-
-function App() {
-  return <AccordionWithSearch items={customItems} />;
-}
+<Breadcrumbs
+  items={[
+    { title: 'Home', path: '/' },
+    { title: 'Settings', path: '/settings' },
+    { title: 'Profile' },
+  ]}
+/>
 ```
 
-#### Props
+Custom separator: `<Breadcrumbs separator={<span>/</span>} />`.
+[Full docs →](https://adjanour.github.io/ReactComponents/components/breadcrumbs)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `AccordionItemType[]` | `defaultAccordionItems` | Array of accordion items to display |
-| `className` | `string` | `''` | Additional CSS classes for the accordion container |
+---
 
-#### AccordionItemType Interface
+### CommandPalette
 
-```typescript
-interface AccordionItemType {
-  title: string;
-  icon?: ReactNode;
-  path?: string;
-  children?: AccordionItemType[];
-}
+Cmd+K / Ctrl+K palette for keyboard navigation.
+
+```tsx
+import { CommandPalette } from '@adjanour/react-components'
+import '@adjanour/react-components/command-palette.css'
+
+<CommandPalette
+  items={navItems}
+  renderLink={(item, children) => (
+    <NavLink to={item.path!}>{children}</NavLink>
+  )}
+/>
 ```
+
+- **Arrow keys** to navigate, **Enter** to select, **Escape** to close
+- Nested items are flattened to leaf nodes
+- [Full docs →](https://adjanour.github.io/ReactComponents/components/command-palette)
+
+---
 
 ## Styling
 
-The components use Tailwind CSS utility classes. Make sure to include Tailwind CSS in your project or provide your own styles for these classes:
+Import the CSS file for the component you use:
 
-- `accordion`
-- `accordion-item`
-- `accordion-children`
-- `accordion-child`
-- `searchBar`
-- `search-form`
+```tsx
+import '@adjanour/react-components/accordion.css'
+import '@adjanour/react-components/breadcrumbs.css'
+import '@adjanour/react-components/command-palette.css'
+import '@adjanour/react-components/styles.css' // or all at once
+```
 
-### Example CSS
+All styles use `@layer aw-components` and CSS custom properties for easy theming:
 
 ```css
-.accordion {
-  width: 100%;
-  max-width: 300px;
-}
-
-.accordion-item {
-  padding: 0.75rem 1rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: none;
-  background: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.accordion-item:hover {
-  background-color: #f3f4f6;
-}
-
-.accordion-children {
-  padding-left: 1rem;
-  background-color: #f9fafb;
-}
-
-.accordion-child {
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.searchBar {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
+.my-nav {
+  --aw-bg: #f8fafc;
+  --aw-text: #0f172a;
+  --aw-ring-color: #a78bfa;
 }
 ```
+
+Dark mode is automatic via `prefers-color-scheme: dark`.
+[Full theming guide →](https://adjanour.github.io/ReactComponents/guide/styling)
+
+---
+
+## Package
+
+| Entry | Size |
+|-------|------|
+| ESM | 11.4 KB |
+| CJS | 12.0 KB |
+| CSS | 4.5 KB total |
+
+- `"type": "module"` with dual ESM + CJS output
+- Tree-shakeable — import only what you use
+- Full TypeScript definitions included
+
+---
 
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Build the library
-npm run build
-
-# Lint code
-npm run lint
-
-# Format code
-npm run format
+pnpm install
+pnpm dev          # watch build
+pnpm test         # 33 tests (Vitest + Testing Library)
+pnpm lint         # ESLint 9 flat config
+pnpm typecheck    # TypeScript 5.9
+pnpm build        # tsup
+pnpm docs:dev     # VitePress docs site
+pnpm docs:build   # build docs for deploy
 ```
-
-## TypeScript Support
-
-This package is written in TypeScript and includes type definitions out of the box. No need for `@types/*` packages!
-
-## Browser Support
-
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- React 17+ or React 18+
-
-## Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
-
-## Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md) for release history.
-
-## License
-
-MIT © [Adjanour](https://github.com/Adjanour)
-
-## Support
-
-If you encounter any issues or have questions:
-- Email: adjanour@icloud.com
-- [Report a bug](https://github.com/Adjanour/ReactComponents/issues)
-- [Request a feature](https://github.com/Adjanour/ReactComponents/issues)
 
 ---
 
-<div align="center">
-  Made with ❤️ by Africoda
-</div>
+## License
+
+Unlicense — public domain. [Learn more](https://unlicense.org).

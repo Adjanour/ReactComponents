@@ -1,76 +1,89 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 import { AccordionWithSearch } from './AccordionWithSearch';
-import { AccordionItemType } from './types';
+import type { AccordionItemType } from './types';
 
 const mockItems: AccordionItemType[] = [
-  {
-    title: 'Home',
-    path: '/',
-  },
+  { title: 'Home', path: '/' },
   {
     title: 'Projects',
     children: [
-      {
-        title: 'All Projects',
-        path: '/projects/all',
-      },
-      {
-        title: 'My Projects',
-        path: '/projects/my',
-      },
+      { title: 'All Projects', path: '/projects/all' },
+      { title: 'My Projects', path: '/projects/my' },
     ],
   },
 ];
 
-const renderWithRouter = (component: React.ReactElement) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-};
-
 describe('AccordionWithSearch', () => {
   it('renders without crashing', () => {
-    renderWithRouter(<AccordionWithSearch items={mockItems} />);
+    render(<AccordionWithSearch items={mockItems} />);
     expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
   });
 
   it('displays all items initially', () => {
-    renderWithRouter(<AccordionWithSearch items={mockItems} />);
+    render(<AccordionWithSearch items={mockItems} />);
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('Projects')).toBeInTheDocument();
   });
 
-  it('renders search input', () => {
-    renderWithRouter(<AccordionWithSearch items={mockItems} />);
-    const searchInput = screen.getByPlaceholderText('Search...');
-    expect(searchInput).toBeInTheDocument();
-    expect(searchInput).toHaveAttribute('type', 'search');
+  it('filters items by search', async () => {
+    const user = userEvent.setup();
+    render(<AccordionWithSearch items={mockItems} />);
+
+    const input = screen.getByPlaceholderText('Search...');
+    await user.type(input, 'Home');
+
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.queryByText('Projects')).not.toBeInTheDocument();
   });
 
-  it('shows no results message when no items match search', () => {
-    renderWithRouter(<AccordionWithSearch items={mockItems} />);
-    const searchInput = screen.getByPlaceholderText('Search...');
-    
-    // Type a search term that won't match
-    searchInput.focus();
-    searchInput.setAttribute('value', 'NonExistent');
-    searchInput.dispatchEvent(new Event('change', { bubbles: true }));
-    
-    // Note: This test verifies the component structure exists
-    // Full user interaction testing would require user-event library
+  it('shows empty state when no items match', async () => {
+    const user = userEvent.setup();
+    render(<AccordionWithSearch items={mockItems} />);
+
+    await user.type(screen.getByPlaceholderText('Search...'), 'NonExistent');
+
+    expect(screen.getByText('No items found')).toBeInTheDocument();
   });
 
   it('accepts custom className', () => {
-    const { container } = renderWithRouter(
-      <AccordionWithSearch items={mockItems} className="custom-class" />
-    );
-    const accordion = container.querySelector('.accordion');
-    expect(accordion).toHaveClass('custom-class');
+    const { container } = render(<AccordionWithSearch items={mockItems} className="my-nav" />);
+    const nav = container.querySelector('.aw-accordion');
+    expect(nav).toHaveClass('my-nav');
   });
 
-  it('uses default items when no items prop provided', () => {
-    renderWithRouter(<AccordionWithSearch />);
-    // Should render with default items
-    const searchInput = screen.getByPlaceholderText('Search...');
-    expect(searchInput).toBeInTheDocument();
+  it('renders without items prop (uses defaults)', () => {
+    render(<AccordionWithSearch />);
+    expect(screen.getByPlaceholderText('Search...')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
+  });
+
+  it('uses renderLink for navigation items', () => {
+    render(
+      <AccordionWithSearch
+        items={[{ title: 'Custom', path: '/custom' }]}
+        renderLink={(item, children) => (
+          <a href={`/app${item.path}`} className="app-link">
+            {children}
+          </a>
+        )}
+      />
+    );
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', '/app/custom');
+  });
+
+  it('allows searching and expanding with user-event', async () => {
+    const user = userEvent.setup();
+    render(<AccordionWithSearch items={mockItems} />);
+
+    const input = screen.getByPlaceholderText('Search...');
+    await user.type(input, 'Pro');
+
+    expect(screen.getByText('Projects')).toBeInTheDocument();
+
+    const button = screen.getByRole('button', { name: /Projects/i });
+    await user.click(button);
+    expect(screen.getByText('All Projects')).toBeInTheDocument();
   });
 });

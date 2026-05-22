@@ -2,19 +2,16 @@ import { useState } from 'react';
 import { AccordionItem } from './AccordionItem';
 import { SearchBar } from './SearchBar';
 import { defaultAccordionItems } from './defaultItems';
-import { AccordionItemType, AccordionWithSearchProps } from './types';
+import type { AccordionItemType, AccordionWithSearchProps } from './types';
 
 export function AccordionWithSearch({
   items = defaultAccordionItems,
   className = '',
+  renderLink,
 }: AccordionWithSearchProps) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredAccordionItems = items.filter(
+  const filteredItems = items.filter(
     (item: AccordionItemType) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase().trim()) ||
       (item.children &&
@@ -23,25 +20,22 @@ export function AccordionWithSearch({
         ))
   );
 
-  const hasItems = filteredAccordionItems.length > 0;
-
   return (
-    <div className={`accordion ${className}`}>
-      <SearchBar onSearch={handleSearch} />
-      <hr />
-      {hasItems &&
-        filteredAccordionItems.map((item: AccordionItemType) => (
+    <nav className={`aw-accordion${className ? ` ${className}` : ''}`}>
+      <SearchBar value={searchTerm} onChange={setSearchTerm} />
+      <hr className="aw-divider" />
+      {filteredItems.length > 0 ? (
+        filteredItems.map((item) => (
           <AccordionItem
             key={item.title}
-            icon={item.icon}
-            title={item.title}
-            path={item.path}
+            item={item}
             searchTerm={searchTerm}
-          >
-            {item.children}
-          </AccordionItem>
-        ))}
-      {!hasItems && <p className="no-results">No items found</p>}
-    </div>
+            renderLink={renderLink}
+          />
+        ))
+      ) : (
+        <p className="aw-empty">No items found</p>
+      )}
+    </nav>
   );
 }

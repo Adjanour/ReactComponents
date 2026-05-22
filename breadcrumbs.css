@@ -1,0 +1,56 @@
+@layer aw-components {
+  .aw-breadcrumbs {
+    --aw-bc-sep-color: #94a3b8;
+    --aw-bc-link: #3b82f6;
+    --aw-bc-link-hover: #2563eb;
+    --aw-bc-current: #0f172a;
+    --aw-bc-font: system-ui, -apple-system, sans-serif;
+    --aw-bc-gap: 6px;
+    font-family: var(--aw-bc-font);
+    font-size: 14px;
+  }
+  .aw-breadcrumbs ol {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--aw-bc-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .aw-breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: var(--aw-bc-gap);
+  }
+  .aw-breadcrumbs a {
+    color: var(--aw-bc-link);
+    text-decoration: none;
+    outline: none;
+    border-radius: 4px;
+    transition: color 150ms ease;
+  }
+  .aw-breadcrumbs a:hover {
+    color: var(--aw-bc-link-hover);
+    text-decoration: underline;
+  }
+  .aw-breadcrumbs a:focus-visible {
+    box-shadow: 0 0 0 2px var(--aw-bc-link);
+  }
+  .aw-breadcrumbs [aria-current='page'] {
+    color: var(--aw-bc-current);
+    font-weight: 500;
+  }
+  .aw-bc-sep {
+    flex-shrink: 0;
+    color: var(--aw-bc-sep-color);
+  }
+  @media (prefers-color-scheme: dark) {
+    .aw-breadcrumbs {
+      --aw-bc-sep-color: #64748b;
+      --aw-bc-link: #60a5fa;
+      --aw-bc-link-hover: #93c5fd;
+      --aw-bc-current: #f1f5f9;
+    }
+  }
+}

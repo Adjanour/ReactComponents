@@ -1,15 +1,17 @@
-import { SearchBarProps } from './types';
+interface SearchBarProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-export function SearchBar({ onSearch }: SearchBarProps) {
+export function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <form className="search-form" onSubmit={(e) => e.preventDefault()}>
-      <input
-        className="searchBar"
-        type="search"
-        placeholder="Search..."
-        onChange={onSearch}
-        aria-label="Search accordion items"
-      />
-    </form>
+    <input
+      type="search"
+      className="aw-search"
+      placeholder="Search..."
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      aria-label="Search menu items"
+    />
   );
 }
