@@ -1,0 +1,63 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: TableOfContents
+---
+
+# TableOfContents
+
+An auto-highlighting table of contents sidebar.
+Tracks which heading is currently in view via `IntersectionObserver`.
+
+## Import
+
+```tsx
+import { TableOfContents } from '@adjanour/react-components'
+import '@adjanour/react-components/table-of-contents.css'
+```
+
+## Usage
+
+```tsx
+const headings = [
+  { id: 'intro', label: 'Introduction', level: 2 },
+  { id: 'usage', label: 'Usage', level: 2 },
+  { id: 'api', label: 'API Reference', level: 3 },
+  { id: 'examples', label: 'Examples', level: 2 },
+]
+
+<TableOfContents headings={headings} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `headings` | `TocHeading[]` | Required | Array of `{ id, label, level }` |
+| `renderLink` | `(heading, children) => ReactNode` | `<a>` | Custom link renderer |
+
+### TocHeading
+
+```ts
+interface TocHeading {
+  id: string
+  label: string
+  level: number
+}
+```
+
+## Behavior
+
+- Highlights the heading currently scrolled into view
+- Indentation reflects heading level (h3 indented under h2)
+- Uses IntersectionObserver with root margin for scroll offset
+- Scrolls to heading on click
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-toc-text` | `#475569` | Inactive item text |
+| `--aw-toc-active-text` | `#0f172a` | Active item text |
+| `--aw-toc-active-border` | `#3b82f6` | Active item left border |
+| `--aw-toc-label` | `#94a3b8` | "On this page" label |
+| `--aw-toc-hover` | `#3b82f6` | Hover text color |

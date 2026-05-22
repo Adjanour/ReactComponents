@@ -1,0 +1,58 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Tabs
+---
+
+import { LiveTabs } from '../../components/LiveTabs'
+
+# Tabs
+
+Accessible tabbed interface with keyboard navigation.
+
+## Import
+
+```tsx
+import { Tabs } from '@adjanour/react-components'
+import '@adjanour/react-components/tabs.css'
+```
+
+## Live Example
+
+<LiveTabs client:only="react" />
+
+## Usage
+
+```tsx
+<Tabs
+  tabs={[
+    { label: 'Overview', content: <p>Overview content</p> },
+    { label: 'Usage', content: <p>Usage instructions</p> },
+    { label: 'API', content: <p>API reference</p> },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tabs` | `Tab[]` | Required | Array of `{ label, content }` |
+| `defaultIndex` | `number` | `0` | Initially active tab |
+
+## Behavior
+
+- Arrow keys navigate between tabs (Left/Right, Up/Down)
+- Home/End jumps to first/last tab
+- `aria-selected` on active tab, `hidden` on inactive panels
+- `aria-controls` / `aria-labelledby` associations
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-tabs-border` | `#e2e8f0` | Tablist bottom border |
+| `--aw-tabs-text` | `#475569` | Inactive tab text |
+| `--aw-tabs-active-text` | `#0f172a` | Active tab text |
+| `--aw-tabs-active-border` | `#3b82f6` | Active tab underline |
+| `--aw-tabs-hover-bg` | `#f8fafc` | Tab hover background |
+| `--aw-tabs-radius` | `6px` | Focus ring radius |

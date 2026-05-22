@@ -1,0 +1,63 @@
+@layer aw-components {
+  .aw-toc {
+    --aw-toc-font: system-ui, -apple-system, sans-serif;
+    --aw-toc-text: #475569;
+    --aw-toc-active-text: #0f172a;
+    --aw-toc-active-border: #3b82f6;
+    --aw-toc-label: #94a3b8;
+    --aw-toc-hover: #3b82f6;
+    font-family: var(--aw-toc-font);
+    font-size: 0.8125rem;
+  }
+
+  .aw-toc-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--aw-toc-label);
+    margin-bottom: 0.75rem;
+  }
+
+  .aw-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aw-toc-item {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .aw-toc-item a {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--aw-toc-text);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .aw-toc-item a:hover {
+    color: var(--aw-toc-hover);
+  }
+
+  .aw-toc-active a {
+    color: var(--aw-toc-active-text);
+    border-left-color: var(--aw-toc-active-border);
+    font-weight: 500;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .aw-toc {
+      --aw-toc-text: #94a3b8;
+      --aw-toc-active-text: #e2e8f0;
+      --aw-toc-active-border: #60a5fa;
+      --aw-toc-label: #64748b;
+      --aw-toc-hover: #60a5fa;
+    }
+  }
+}

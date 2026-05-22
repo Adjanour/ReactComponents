@@ -1,0 +1,65 @@
+@layer aw-components {
+  .aw-tabs {
+    --aw-tabs-border: #e2e8f0;
+    --aw-tabs-text: #475569;
+    --aw-tabs-active-text: #0f172a;
+    --aw-tabs-active-border: #3b82f6;
+    --aw-tabs-hover-bg: #f8fafc;
+    --aw-tabs-font: system-ui, -apple-system, sans-serif;
+    --aw-tabs-radius: 6px;
+    font-family: var(--aw-tabs-font);
+  }
+
+  .aw-tablist {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--aw-tabs-border);
+  }
+
+  .aw-tab {
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.625rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--aw-tabs-text);
+    cursor: pointer;
+    outline: none;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    margin-bottom: -1px;
+    white-space: nowrap;
+  }
+
+  .aw-tab:hover {
+    background: var(--aw-tabs-hover-bg);
+  }
+
+  .aw-tab:focus-visible {
+    outline: 2px solid var(--aw-tabs-active-border);
+    outline-offset: -2px;
+    border-radius: var(--aw-tabs-radius);
+  }
+
+  .aw-tab-active {
+    color: var(--aw-tabs-active-text);
+    border-bottom-color: var(--aw-tabs-active-border);
+  }
+
+  .aw-tabpanel {
+    padding: 1rem 0;
+    font-size: 0.875rem;
+    color: var(--aw-tabs-text);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .aw-tabs {
+      --aw-tabs-border: #1e293b;
+      --aw-tabs-text: #94a3b8;
+      --aw-tabs-active-text: #e2e8f0;
+      --aw-tabs-active-border: #60a5fa;
+      --aw-tabs-hover-bg: #131c2e;
+    }
+  }
+}

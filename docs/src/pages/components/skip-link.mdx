@@ -1,0 +1,46 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: SkipLink
+---
+
+# SkipLink
+
+A visually hidden skip-to-content link that becomes visible on focus.
+Essential for keyboard accessibility.
+
+## Import
+
+```tsx
+import { SkipLink } from '@adjanour/react-components'
+import '@adjanour/react-components/skip-link.css'
+```
+
+## Usage
+
+Place it as the first focusable element on the page.
+
+```tsx
+<SkipLink href="#main-content">Skip to content</SkipLink>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `href` | `string` | `'#main-content'` | Target anchor ID |
+| `children` | `ReactNode` | `'Skip to content'` | Link label |
+
+## Behavior
+
+- Hidden off-screen by default (`position: absolute; top: -100%`)
+- Slides into view on focus via keyboard tabbing
+- Uses native `<a href="#id">` for smooth scrolling
+- Dark mode: inverts background/text
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-skip-bg` | `#0f172a` | Background color |
+| `--aw-skip-text` | `#fff` | Text color |
+| `--aw-skip-radius` | `6px` | Border radius |

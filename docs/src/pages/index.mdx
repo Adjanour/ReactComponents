@@ -57,4 +57,66 @@ import '@adjanour/react-components/breadcrumbs.css'
 
 Press **Cmd+K** / **Ctrl+K** to open. Arrow keys to navigate, Enter to select.
 
-[View full docs →](/ReactComponents/components/command-palette)
+[View full docs &#8594;](/react-components/components/command-palette)
+
+---
+
+## Tabs
+
+Accessible tabbed interface with keyboard navigation.
+
+```tsx
+import { Tabs } from '@adjanour/react-components'
+import '@adjanour/react-components/tabs.css'
+
+<Tabs
+  tabs={[
+    { label: 'Overview', content: <p>Overview content</p> },
+    { label: 'Usage', content: <p>Usage instructions</p> },
+  ]}
+/>
+```
+
+---
+
+## Tooltip
+
+Lightweight accessible tooltip. Four positions, shows on hover/focus.
+
+```tsx
+import { Tooltip } from '@adjanour/react-components'
+import '@adjanour/react-components/tooltip.css'
+
+<Tooltip content="Helpful hint" position="top">
+  <button>Hover me</button>
+</Tooltip>
+```
+
+---
+
+## SkipLink
+
+Visually hidden skip link for keyboard accessibility.
+
+```tsx
+import { SkipLink } from '@adjanour/react-components'
+import '@adjanour/react-components/skip-link.css'
+
+<SkipLink href="#main-content">Skip to content</SkipLink>
+```
+
+---
+
+## TableOfContents
+
+Auto-highlighting table of contents with scroll spy.
+
+```tsx
+import { TableOfContents } from '@adjanour/react-components'
+import '@adjanour/react-components/table-of-contents.css'
+
+<TableOfContents headings={[
+  { id: 'intro', label: 'Introduction', level: 2 },
+  { id: 'usage', label: 'Usage', level: 2 },
+]} />
+```

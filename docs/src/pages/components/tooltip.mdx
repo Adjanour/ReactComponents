@@ -1,0 +1,56 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Tooltip
+---
+
+import { LiveTooltip } from '../../components/LiveTooltip'
+
+# Tooltip
+
+A lightweight accessible tooltip that appears on hover or focus.
+
+## Import
+
+```tsx
+import { Tooltip } from '@adjanour/react-components'
+import '@adjanour/react-components/tooltip.css'
+```
+
+## Live Example
+
+Hover or focus each button to see the tooltip:
+
+<LiveTooltip client:only="react" />
+
+## Usage
+
+```tsx
+<Tooltip content="Helpful hint" position="top">
+  <button>Hover me</button>
+</Tooltip>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `content` | `ReactNode` | Required | Tooltip content |
+| `children` | `ReactNode` | Required | Trigger element |
+| `position` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Tooltip position |
+
+## Behavior
+
+- Shows on mouse hover and keyboard focus
+- Hides on mouse leave and blur
+- `role="tooltip"` for screen reader compatibility
+- `aria-describedby` connects trigger to tooltip
+- CSS arrow pointer on the near edge
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-tooltip-bg` | `#0f172a` | Background |
+| `--aw-tooltip-text` | `#fff` | Text color |
+| `--aw-tooltip-radius` | `6px` | Border radius |
+| `--aw-tooltip-arrow` | `6px` | Arrow size |

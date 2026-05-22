@@ -3,3 +3,8 @@ export type { AccordionItemType, AccordionWithSearchProps } from './components/A
 
 export { Breadcrumbs } from './components/Breadcrumbs'
 export { CommandPalette } from './components/CommandPalette'
+export { SkipLink } from './components/SkipLink'
+export { Tabs } from './components/Tabs'
+export { TableOfContents } from './components/TableOfContents'
+export type { TocHeading } from './components/TableOfContents'
+export { Tooltip } from './components/Tooltip'

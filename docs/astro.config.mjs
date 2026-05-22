@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   integrations: [react(), mdx()],
   site: 'https://adjanour.github.io',
-  base: '/ReactComponents',
+  base: '/react-components',
   srcDir: path.join(__dirname, 'src'),
   outDir: path.join(__dirname, 'dist'),
   publicDir: path.join(__dirname, 'public'),

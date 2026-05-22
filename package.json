@@ -21,6 +21,10 @@
     "./accordion.css": "./accordion.css",
     "./breadcrumbs.css": "./breadcrumbs.css",
     "./command-palette.css": "./command-palette.css",
+    "./skip-link.css": "./skip-link.css",
+    "./tabs.css": "./tabs.css",
+    "./table-of-contents.css": "./table-of-contents.css",
+    "./tooltip.css": "./tooltip.css",
     "./styles.css": "./styles.css"
   },
   "sideEffects": [
@@ -55,6 +59,10 @@
     "navigation",
     "breadcrumbs",
     "command-palette",
+    "tabs",
+    "table-of-contents",
+    "skip-link",
+    "tooltip",
     "ui",
     "typescript"
   ],
