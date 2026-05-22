@@ -5,6 +5,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-05-22
+
+### Added
+
+- **Breadcrumbs component** — navigation breadcrumb trail with `aria-current`
+- **CommandPalette component** — Cmd+K / Ctrl+K keyboard palette with search
+- **Docs site** — Astro + MDX with live interactive React examples, auto-deployed to GitHub Pages
+- **`renderLink` prop** — works with any router (React Router, Next.js, etc.)
+- **Built-in CSS** — per-component stylesheets with `@layer aw-components`, dark mode, CSS custom properties
+- **Breadcrumbs.css** — self-contained styling for the Breadcrumbs component
+- **CommandPalette.css** — self-contained styling for the CommandPalette component
+- **Interactive examples** — LiveAccordion, LiveBreadcrumbs, LiveCommandPalette components in docs
+- **GH Actions docs deploy** — auto-builds and publishes docs site to GitHub Pages on push to main
+
+### Changed
+
+- **License: MIT → Unlicense** — public domain, no restrictions
+- **Package manager: npm → pnpm** — faster installs, strict dependency isolation
+- **ESLint 8 → ESLint 9 flat config** — modern `eslint.config.mjs`
+- **TypeScript target: ES2020 → ES2022**
+- **`"type": "module"`** — ESM-first package
+- **CJS output: `.js` → `.cjs`** — correct module resolution
+- **`tsup splitting: true`** — better tree-shaking
+- **AccordionWithSearch API** — no longer depends on `react-router-dom`; uses `renderLink` prop
+- **AccordionItem API** — accepts `item` prop instead of fragmented title/icon/path/children
+- **SearchBar** — controlled `value` + `onChange` instead of raw DOM events
+- **Removed `clsx` dependency** — replaced with string concatenation
+- **Removed `@heroicons/react` from defaults** — text-only default items, inline SVG chevrons
+- **Removed `react-router-dom` from peer deps** — framework-agnostic
+- **React 17 → React 18/19** in peer deps
+- **CI workflow** — pnpm, Node 20/22, simpler matrix
+- **`@testing-library/jest-dom` → `/vitest` entry** — Vitest-native matchers
+- **Published CSS files** — `accordion.css`, `breadcrumbs.css`, `command-palette.css`, `styles.css`
+- **README** — full rewrite with inline examples for all components, Unlicense badge
+
+### Removed
+
+- `package-lock.json` → `pnpm-lock.yaml`
+- `.eslintrc.json` → `eslint.config.mjs`
+- VitePress docs → Astro + MDX
+- `@heroicons/react` dev dependency
+- `clsx` dev dependency
+- `react-router-dom` peer dependency
+- `examples/` old CSS and README
+
 ## [1.0.0] - 2026-02-07
 
 ### Added
