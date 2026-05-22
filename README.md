@@ -9,7 +9,7 @@ Accessible, framework-agnostic React components with built-in CSS, dark mode, an
 
 Components: `AccordionWithSearch`, `Breadcrumbs`, `CommandPalette`
 
-[**Docs site**](https://adjanour.github.io/ReactComponents/) — [**Install**](#install) — [**Components**](#components)
+[**Docs site**](https://adjanour.github.io/ReactComponents/) &middot; [**Install**](#install) &middot; [**Components**](#components)
 
 ---
 
@@ -150,7 +150,7 @@ Dark mode is automatic via `prefers-color-scheme: dark`.
 | CSS | 4.5 KB total |
 
 - `"type": "module"` with dual ESM + CJS output
-- Tree-shakeable — import only what you use
+- Tree-shakeable - import only what you use
 - Full TypeScript definitions included
 
 ---
@@ -172,4 +172,4 @@ pnpm docs:build   # build docs for deploy
 
 ## License
 
-Unlicense — public domain. [Learn more](https://unlicense.org).
+Unlicense - public domain. [Learn more](https://unlicense.org).

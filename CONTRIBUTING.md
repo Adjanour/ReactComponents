@@ -1,78 +1,53 @@
 # Contributing to ReactComponents
 
-Thank you for your interest in contributing to ReactComponents! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing.
 
 ## Development Setup
 
-1. **Fork and clone the repository**
+```bash
+git clone https://github.com/Adjanour/ReactComponents.git
+cd ReactComponents
+pnpm install
+```
 
-   ```bash
-   git clone https://github.com/Adjanour/ReactComponents.git
-   cd ReactComponents
-   ```
+This project uses pnpm. If you don't have it installed:
 
-2. **Install dependencies**
+```bash
+npm install -g pnpm
+```
 
-   ```bash
-   npm install
-   ```
+## Available Scripts
 
-3. **Run tests**
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Watch mode build |
+| `pnpm test` | Run tests (Vitest) |
+| `pnpm lint` | Lint with ESLint 9 |
+| `pnpm typecheck` | TypeScript type checking |
+| `pnpm build` | Production build with tsup |
+| `pnpm docs:dev` | Start the Astro docs site |
+| `pnpm docs:build` | Build the docs site |
 
-   ```bash
-   npm test
-   ```
+## Workflow
 
-4. **Build the project**
-   ```bash
-   npm run build
-   ```
-
-## Development Workflow
-
-1. **Create a new branch**
-
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Make your changes**
-   - Write clean, maintainable code
-   - Follow the existing code style
-   - Add tests for new features
-   - Update documentation as needed
-
-3. **Run quality checks**
-
-   ```bash
-   npm run lint
-   npm run typecheck
-   npm test
-   ```
-
-4. **Commit your changes**
-   - Use clear, descriptive commit messages
-   - Follow conventional commits format if possible
-
-5. **Submit a pull request**
-   - Provide a clear description of the changes
-   - Reference any related issues
-   - Ensure all CI checks pass
+1. Create a branch: `git checkout -b feature/your-feature`
+2. Make changes following the existing code style
+3. Add tests for new features
+4. Run quality checks: `pnpm lint && pnpm typecheck && pnpm test`
+5. Commit with clear messages (conventional commits preferred)
+6. Push and open a pull request
 
 ## Code Style
 
-- We use ESLint and Prettier for code formatting
-- Run `npm run format` to auto-format your code
-- Run `npm run lint:fix` to auto-fix linting issues
-- Follow TypeScript best practices
-- Write meaningful variable and function names
+- ESLint and Prettier are configured
+- Use `pnpm run lint:fix` to auto-fix issues
+- Follow TypeScript best practices with strict types
 
 ## Testing
 
-- Write unit tests for all new features
-- Ensure all tests pass before submitting PR
-- Aim for high code coverage
+- Write unit tests for new features
 - Use React Testing Library for component tests
+- Ensure all tests pass before submitting a PR
 
 ## Documentation
 
@@ -83,8 +58,8 @@ Thank you for your interest in contributing to ReactComponents! This document pr
 
 ## Questions?
 
-Feel free to reach out to [adjanour@icloud.com](mailto:adjanour@icloud.com) if you have any questions.
+Contact [adjanour@icloud.com](mailto:adjanour@icloud.com).
 
 ## Code of Conduct
 
-Be respectful and professional in all interactions. We're here to build great software together!
+Be respectful and professional in all interactions.

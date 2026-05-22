@@ -10,46 +10,156 @@ const { title } = Astro.props
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} — React Components</title>
+    <title>{title} · React Components</title>
     <link rel="icon" type="image/svg+xml" href="/ReactComponents/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet" />
+    <meta name="color-scheme" content="light dark" />
     <style>
+      :root {
+        --font: 'Inter', system-ui, -apple-system, sans-serif;
+        --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+        --c-bg: #ffffff;
+        --c-bg-subtle: #f8fafc;
+        --c-bg-code: #0f172a;
+        --c-text: #0f172a;
+        --c-text-secondary: #475569;
+        --c-text-muted: #94a3b8;
+        --c-accent: #3b82f6;
+        --c-accent-hover: #2563eb;
+        --c-border: #e2e8f0;
+        --c-nav-bg: #ffffff;
+        --c-footer-bg: #f8fafc;
+        --radius: 8px;
+        --max-w: 800px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --c-bg: #0b1121;
+          --c-bg-subtle: #131c2e;
+          --c-bg-code: #0d1117;
+          --c-text: #e2e8f0;
+          --c-text-secondary: #94a3b8;
+          --c-text-muted: #64748b;
+          --c-accent: #60a5fa;
+          --c-accent-hover: #93c5fd;
+          --c-border: #1e293b;
+          --c-nav-bg: #0b1121;
+          --c-footer-bg: #0d1117;
+        }
+      }
+      [data-theme="dark"] {
+        --c-bg: #0b1121;
+        --c-bg-subtle: #131c2e;
+        --c-bg-code: #0d1117;
+        --c-text: #e2e8f0;
+        --c-text-secondary: #94a3b8;
+        --c-text-muted: #64748b;
+        --c-accent: #60a5fa;
+        --c-accent-hover: #93c5fd;
+        --c-border: #1e293b;
+        --c-nav-bg: #0b1121;
+        --c-footer-bg: #0d1117;
+      }
       * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
       body {
-        font-family: system-ui, -apple-system, sans-serif;
-        color: #0f172a;
-        background: #fff;
-        line-height: 1.6;
+        font-family: var(--font);
+        color: var(--c-text);
+        background: var(--c-bg);
+        line-height: 1.7;
       }
       nav {
-        display: flex; gap: 1.2rem; align-items: center;
-        padding: 0.8rem 1.5rem; border-bottom: 1px solid #e2e8f0;
+        display: flex; gap: 1.5rem; align-items: center;
+        padding: 1rem 1.5rem; max-width: var(--max-w); margin: 0 auto;
         font-size: 0.9rem;
       }
-      nav a { color: #3b82f6; text-decoration: none; font-weight: 500; }
-      nav a:hover { text-decoration: underline; }
-      nav .logo { font-weight: 700; color: #0f172a; font-size: 1rem; }
+      nav a { color: var(--c-text-secondary); text-decoration: none; font-weight: 450; }
+      nav a:hover { color: var(--c-accent); }
+      nav .logo { font-weight: 650; color: var(--c-text); font-size: 1rem; letter-spacing: -0.01em; }
       nav .spacer { flex: 1; }
-      .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-      h1 { font-size: 2rem; margin: 0 0 0.5rem; }
-      h2 { font-size: 1.4rem; margin: 2rem 0 0.5rem; }
-      h3 { font-size: 1.1rem; margin: 1.5rem 0 0.3rem; }
-      p { margin: 0.5rem 0; }
-      ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
-      li { margin: 0.3rem 0; }
-      code { font-size: 0.85em; padding: 0.15em 0.3em; background: #f1f5f9; border-radius: 4px; }
-      pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; margin: 1rem 0; }
-      pre code { background: none; padding: 0; color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-      th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e2e8f0; }
-      th { font-weight: 600; background: #f8fafc; }
-      hr { border: none; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
-      .example-box {
-        border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;
-        margin: 1rem 0; background: #fafafa;
+      .theme-btn {
+        background: none; border: 1px solid var(--c-border); border-radius: 6px;
+        color: var(--c-text-secondary); cursor: pointer; font-size: 1rem;
+        line-height: 1; padding: 0.35rem 0.5rem;
+        display: flex; align-items: center; gap: 0.25rem;
       }
-      .example-box.dark-bg { background: #1e293b; }
-      footer { text-align: center; font-size: 0.8rem; color: #94a3b8; padding: 2rem 1.5rem; }
+      .theme-btn:hover { color: var(--c-accent); border-color: var(--c-accent); }
+      .container {
+        max-width: var(--max-w); margin: 0 auto; padding: 2.5rem 1.5rem 5rem;
+      }
+      footer {
+        text-align: center; font-size: 0.8rem; color: var(--c-text-muted);
+        padding: 2rem 1.5rem; background: var(--c-footer-bg);
+        border-top: 1px solid var(--c-border);
+      }
+      @layer docs {
+        :global(.content h1) { font-size: 2.25rem; font-weight: 650; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 0.75rem; }
+        :global(.content h2) { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; margin: 2.5rem 0 0.5rem; }
+        :global(.content h3) { font-size: 1.125rem; font-weight: 600; margin: 1.75rem 0 0.25rem; }
+        :global(.content p) { margin: 0.75rem 0; }
+        :global(.content a) { color: var(--c-accent); }
+        :global(.content a:hover) { color: var(--c-accent-hover); text-decoration: underline; }
+        :global(.content ul),
+        :global(.content ol) { padding-left: 1.5rem; margin: 0.75rem 0; }
+        :global(.content li) { margin: 0.3rem 0; }
+        :global(.content code) {
+          font-family: var(--mono);
+          font-size: 0.8rem;
+          padding: 0.2em 0.35em;
+          background: var(--c-bg-subtle);
+          border: 1px solid var(--c-border);
+          border-radius: 5px;
+        }
+        :global(.content pre.astro-code),
+        :global(.content pre) {
+          background: var(--c-bg-code) !important;
+          color: #e2e8f0 !important;
+          padding: 1.25rem !important;
+          border-radius: var(--radius);
+          font-family: var(--mono);
+          font-size: 0.8rem;
+          line-height: 1.6;
+          margin: 1.25rem 0;
+        }
+        :global(.content pre code) {
+          background: none;
+          padding: 0;
+          border: none;
+          color: inherit;
+          font-size: inherit;
+        }
+        :global(.content table) { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.875rem; }
+        :global(.content th),
+        :global(.content td) { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--c-border); }
+        :global(.content th) { font-weight: 600; background: var(--c-bg-subtle); }
+        :global(.content hr) { border: none; border-top: 1px solid var(--c-border); margin: 2rem 0; }
+        :global(.content blockquote) {
+          border-left: 3px solid var(--c-accent);
+          padding: 0.5rem 1rem;
+          margin: 1.25rem 0;
+          background: var(--c-bg-subtle);
+          border-radius: 0 var(--radius) var(--radius) 0;
+        }
+      }
+      :global(.example-box) {
+        border: 1px solid var(--c-border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin: 1.25rem 0;
+      }
+      :global(.example-box.dark-bg) { background: #1e293b; }
     </style>
+    <script>
+      (function() {
+        var stored = localStorage.getItem('theme')
+        var html = document.documentElement
+        if (stored === 'dark' || stored === 'light') {
+          html.setAttribute('data-theme', stored)
+        }
+      })()
+    </script>
   </head>
   <body>
     <nav>
@@ -60,12 +170,35 @@ const { title } = Astro.props
       <a href="/ReactComponents/components/breadcrumbs">Breadcrumbs</a>
       <a href="/ReactComponents/components/command-palette">Palette</a>
       <a href="https://github.com/Adjanour/ReactComponents">GitHub</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">Light</button>
     </nav>
+    <script>
+      (function() {
+        var btn = document.getElementById('themeToggle')
+        var html = document.documentElement
+        function isDark() {
+          return html.getAttribute('data-theme') === 'dark' ||
+            (!html.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        }
+        function updateLabel() {
+          btn.textContent = isDark() ? 'Light' : 'Dark'
+        }
+        btn.addEventListener('click', function() {
+          html.setAttribute('data-theme', isDark() ? 'light' : 'dark')
+          localStorage.setItem('theme', isDark() ? 'light' : 'dark')
+          updateLabel()
+        })
+        updateLabel()
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateLabel)
+      })()
+    </script>
     <div class="container">
-      <slot />
+      <div class="content">
+        <slot />
+      </div>
     </div>
     <footer>
-      <p>Unlicense — free for any use. No restrictions, no attribution required.</p>
+      <p>React Components by Bernard Kirk Adjarnor Katamanso &copy; 2026</p>
     </footer>
   </body>
 </html>
