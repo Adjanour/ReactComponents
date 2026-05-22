@@ -1,0 +1,81 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: Breadcrumbs
+---
+
+import { LiveBreadcrumbs } from '../../components/LiveBreadcrumbs.tsx'
+
+# Breadcrumbs
+
+A navigation breadcrumb trail with automatic `aria-current="page"` on the
+last item. Links are rendered for items with a `path`; the final item renders
+as plain text.
+
+## Import
+
+```tsx
+import { Breadcrumbs } from '@adjanour/react-components'
+import '@adjanour/react-components/breadcrumbs.css'
+```
+
+## Live Example
+
+<LiveBreadcrumbs client:only="react" />
+
+```tsx
+const items = [
+  { title: 'Home', path: '/' },
+  { title: 'Projects', path: '/projects' },
+  { title: 'Active' },
+]
+
+<Breadcrumbs items={items} />
+```
+
+## Custom Separator
+
+```tsx
+<Breadcrumbs
+  items={items}
+  separator={<span>/</span>}
+/>
+```
+
+## With React Router
+
+```tsx
+<Breadcrumbs
+  items={[
+    { title: 'Home', path: '/' },
+    { title: 'Profile' },
+  ]}
+  renderLink={(item, children) => (
+    <Link to={item.path!}>{children}</Link>
+  )}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `Crumb[]` | Required | Breadcrumb trail |
+| `separator` | `ReactNode` | Chevron icon | Separator between items |
+| `renderLink` | `(item, children) => ReactNode` | `<a>` | Custom link renderer |
+
+```ts
+interface Crumb {
+  title: string
+  path?: string
+}
+```
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-bc-link` | `#3b82f6` | Link color |
+| `--aw-bc-link-hover` | `#2563eb` | Link hover |
+| `--aw-bc-current` | `#0f172a` | Current page |
+| `--aw-bc-sep-color` | `#94a3b8` | Separator |
+| `--aw-bc-gap` | `6px` | Spacing |

@@ -4,7 +4,7 @@ import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 
 export default [
-  { ignores: ['dist/', 'node_modules/', 'coverage/'] },
+  { ignores: ['dist/', 'node_modules/', 'coverage/', '**/.astro/'] },
   { files: ['**/*.{ts,tsx}'], ...js.configs.recommended },
   ...ts.configs.recommended.map((c) => ({ files: ['**/*.{ts,tsx}'], ...c })),
   {

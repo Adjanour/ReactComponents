@@ -91,6 +91,12 @@ out
 .nuxt
 dist
 
+# Astro generated types
+.astro/
+
+# Astro docs build
+docs/dist/
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js

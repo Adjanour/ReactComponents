@@ -1,0 +1,93 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: CommandPalette
+---
+
+import { LiveCommandPalette } from '../../components/LiveCommandPalette.tsx'
+
+# CommandPalette
+
+A Cmd+K / Ctrl+K command palette for keyboard-quick navigation. Opens a
+searchable dialog over the page. Nested items are flattened to leaf nodes
+automatically.
+
+## Import
+
+```tsx
+import { CommandPalette } from '@adjanour/react-components'
+import '@adjanour/react-components/command-palette.css'
+```
+
+## Live Example
+
+<LiveCommandPalette client:only="react" />
+
+Press the keyboard shortcut, start typing to filter, arrow keys to navigate,
+Enter to select.
+
+## Usage
+
+```tsx
+const items = [
+  { title: 'Home', path: '/' },
+  {
+    title: 'Projects',
+    children: [
+      { title: 'Active', path: '/projects/active' },
+      { title: 'Archived', path: '/projects/archived' },
+    ],
+  },
+]
+
+export default () => <CommandPalette items={items} />
+```
+
+## With React Router
+
+```tsx
+<CommandPalette
+  items={navItems}
+  renderLink={(item, children) => (
+    <NavLink to={item.path!}>{children}</NavLink>
+  )}
+/>
+```
+
+## Custom Messages
+
+```tsx
+<CommandPalette
+  items={items}
+  placeholder="Type to search..."
+  emptyMessage="No matching pages"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `AccordionItemType[]` | Required | Items (nesting flattened) |
+| `renderLink` | `(item, children) => ReactNode` | `<a>` | Custom link renderer |
+| `placeholder` | `string` | `'Search...'` | Input placeholder |
+| `emptyMessage` | `string` | `'No results found'` | Empty state |
+
+## Behavior
+
+- Opens on **Cmd+K** (Mac) or **Ctrl+K** (Windows/Linux)
+- **Arrow keys** navigate, **Enter** selects, **Escape** closes
+- **Tab** is trapped inside the dialog
+- **Click outside** the dialog closes it
+- `role="dialog"`, `aria-modal="true"`, `role="combobox"` — fully accessible
+
+## Theming
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `--aw-cp-overlay` | `rgba(15,23,42,0.4)` | Backdrop color |
+| `--aw-cp-bg` | `#fff` | Dialog background |
+| `--aw-cp-radius` | `10px` | Dialog border radius |
+| `--aw-cp-hover` | `#f1f5f9` | Item hover background |
+| `--aw-cp-active-text` | `#1d4ed8` | Active item text |
+| `--aw-cp-muted` | `#64748b` | Muted text |
+| `--aw-cp-border` | `#e2e8f0` | Borders |

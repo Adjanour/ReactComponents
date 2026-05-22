@@ -1,7 +1,14 @@
+---
+layout: ../../layouts/DocsLayout.astro
+title: AccordionWithSearch
+---
+
+import { LiveAccordion } from '../../components/LiveAccordion.tsx'
+
 # AccordionWithSearch
 
 A searchable accordion navigation menu. Parent items expand to reveal children.
-Search filters both top-level items and their children.
+Search filters both top-level items and their children in real time.
 
 ## Import
 
@@ -10,25 +17,17 @@ import { AccordionWithSearch } from '@adjanour/react-components'
 import '@adjanour/react-components/accordion.css'
 ```
 
-## Default Usage
+## Live Example
 
-```tsx
-<AccordionWithSearch />
-```
+Try typing in the search box to filter items, then click to expand:
 
-Renders with built-in navigation items (Home, Task, Project, Team, Settings, etc.).
+<LiveAccordion client:only="react" />
 
 ## Custom Items
 
 ```tsx
-import { AccordionWithSearch } from '@adjanour/react-components'
-import type { AccordionItemType } from '@adjanour/react-components'
-
 const items: AccordionItemType[] = [
-  {
-    title: 'Dashboard',
-    path: '/dashboard',
-  },
+  { title: 'Dashboard', path: '/dashboard' },
   {
     title: 'Projects',
     children: [
@@ -36,28 +35,10 @@ const items: AccordionItemType[] = [
       { title: 'Archived', path: '/projects/archived' },
     ],
   },
+  { title: 'Help', path: '/help' },
 ]
 
-export default () => <AccordionWithSearch items={items} />
-```
-
-## With Icons
-
-```tsx
-const items: AccordionItemType[] = [
-  {
-    title: 'Home',
-    icon: <HomeIcon className="aw-item-icon" />,
-    path: '/',
-  },
-  {
-    title: 'Settings',
-    icon: <SettingsIcon className="aw-item-icon" />,
-    children: [
-      { title: 'Profile', path: '/settings/profile' },
-    ],
-  },
-]
+<AccordionWithSearch items={items} />
 ```
 
 ## With React Router
@@ -67,12 +48,20 @@ import { NavLink } from 'react-router-dom'
 
 <AccordionWithSearch
   renderLink={(item, children) => (
-    <NavLink
-      to={item.path!}
-      className={({ isActive }) => isActive ? 'active' : ''}
-    >
-      {children}
-    </NavLink>
+    <NavLink to={item.path!}>{children}</NavLink>
+  )}
+/>
+```
+
+## With Next.js
+
+```tsx
+'use client'
+import Link from 'next/link'
+
+<AccordionWithSearch
+  renderLink={(item, children) => (
+    <Link href={item.path!}>{children}</Link>
   )}
 />
 ```
@@ -93,5 +82,19 @@ interface AccordionItemType {
   icon?: ReactNode
   path?: string
   children?: AccordionItemType[]
+}
+```
+
+## Theming
+
+Override CSS custom properties on `.aw-accordion` or a wrapper class:
+
+```css
+.my-nav {
+  --aw-bg: #f8fafc;
+  --aw-text: #0f172a;
+  --aw-radius: 8px;
+  --aw-ring-color: #a78bfa;
+  max-width: 400px;
 }
 ```

@@ -1,0 +1,60 @@
+---
+layout: ../layouts/DocsLayout.astro
+title: Home
+---
+
+import { LiveAccordion } from '../components/LiveAccordion.tsx'
+import { LiveBreadcrumbs } from '../components/LiveBreadcrumbs.tsx'
+
+# React Components
+
+Accessible, framework-agnostic React components with built-in CSS,
+dark mode, and **zero required peer dependencies** beyond React.
+
+```bash
+pnpm add @adjanour/react-components
+```
+
+## AccordionWithSearch
+
+Searchable accordion navigation menu — type to filter, click to expand.
+
+<LiveAccordion client:only="react" />
+
+```tsx
+import { AccordionWithSearch } from '@adjanour/react-components'
+import '@adjanour/react-components/accordion.css'
+
+function Sidebar() {
+  return <AccordionWithSearch />
+}
+```
+
+---
+
+## Breadcrumbs
+
+Navigation breadcrumb trail with `aria-current="page"` on the last item.
+
+<LiveBreadcrumbs client:only="react" />
+
+```tsx
+import { Breadcrumbs } from '@adjanour/react-components'
+import '@adjanour/react-components/breadcrumbs.css'
+
+<Breadcrumbs
+  items={[
+    { title: 'Home', path: '/' },
+    { title: 'Projects', path: '/projects' },
+    { title: 'Active' },
+  ]}
+/>
+```
+
+---
+
+## CommandPalette
+
+Press **Cmd+K** / **Ctrl+K** to open — arrow keys to navigate, Enter to select.
+
+[View full docs →](/ReactComponents/components/command-palette)

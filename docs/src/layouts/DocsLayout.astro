@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string
+}
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — React Components</title>
+    <link rel="icon" type="image/svg+xml" href="/ReactComponents/favicon.svg" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        color: #0f172a;
+        background: #fff;
+        line-height: 1.6;
+      }
+      nav {
+        display: flex; gap: 1.2rem; align-items: center;
+        padding: 0.8rem 1.5rem; border-bottom: 1px solid #e2e8f0;
+        font-size: 0.9rem;
+      }
+      nav a { color: #3b82f6; text-decoration: none; font-weight: 500; }
+      nav a:hover { text-decoration: underline; }
+      nav .logo { font-weight: 700; color: #0f172a; font-size: 1rem; }
+      nav .spacer { flex: 1; }
+      .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+      h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+      h2 { font-size: 1.4rem; margin: 2rem 0 0.5rem; }
+      h3 { font-size: 1.1rem; margin: 1.5rem 0 0.3rem; }
+      p { margin: 0.5rem 0; }
+      ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+      li { margin: 0.3rem 0; }
+      code { font-size: 0.85em; padding: 0.15em 0.3em; background: #f1f5f9; border-radius: 4px; }
+      pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; margin: 1rem 0; }
+      pre code { background: none; padding: 0; color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+      th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #e2e8f0; }
+      th { font-weight: 600; background: #f8fafc; }
+      hr { border: none; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+      .example-box {
+        border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;
+        margin: 1rem 0; background: #fafafa;
+      }
+      .example-box.dark-bg { background: #1e293b; }
+      footer { text-align: center; font-size: 0.8rem; color: #94a3b8; padding: 2rem 1.5rem; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <span class="logo">React Components</span>
+      <span class="spacer"></span>
+      <a href="/ReactComponents">Home</a>
+      <a href="/ReactComponents/components/accordion-with-search">Accordion</a>
+      <a href="/ReactComponents/components/breadcrumbs">Breadcrumbs</a>
+      <a href="/ReactComponents/components/command-palette">Palette</a>
+      <a href="https://github.com/Adjanour/ReactComponents">GitHub</a>
+    </nav>
+    <div class="container">
+      <slot />
+    </div>
+    <footer>
+      <p>Unlicense — free for any use. No restrictions, no attribution required.</p>
+    </footer>
+  </body>
+</html>
